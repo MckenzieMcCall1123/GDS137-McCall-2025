@@ -12,9 +12,12 @@ var player;
 	context = canvas.getContext("2d");	
 	
 	//Instantiate the Player
-	player = new GameObject();
+	player = new GameObject(25, canvas.height/2);
+	player.width = 25;
+	player.height = 150;
+
 	ball = new GameObject();
-	ball.vy = 5;
+	ball.vy = 10;
 	ball.vx = 10;
 	//Set the Animation Timer
 	timer = setInterval(animate, interval);
@@ -25,54 +28,52 @@ function animate()
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
 	
-	//Move the Player to the right
-	if(w && player.y > canvas.height/2 - 150)
+	if(w && player.y > canvas.height/2 - 325)
 	{
 		console.log("Moving Up");
 		player.y += -2;
 	}
-	if(s && player.y < canvas.height/2 + 500)
-	{
-		console.log("Moving Down");
-		player.y += 2;
-	}
-	
-	if(up && player.y > canvas.height/2 - 150)
-	{
-		console.log("Moving Up");
-		player.y += -2;
-	}
-	if(down)
+	if(s && player.y < canvas.height/2 + 325)
 	{
 		console.log("Moving Down");
 		player.y += 2;
 	}
 
 	//Update the Screen
-	player.drawRect1();
+	player.drawRect();
 
 	ball.drawCircle();
 	ball.move();
 	
 
-	if(ball.x + ball.width/2 > canvas.width)
+	if(ball.x > canvas.width + -50)
 		{
 			ball.vx = -ball.vx;
 			ball.color = randomColor();
 		}
 	
-	if(ball.x < 0)
+	if(ball.x < 0 + 50)
 		{
 			ball.vx = -ball.vx;
 			ball.color = randomColor();
 		}
 
 
-	if(ball.y > canvas.height || ball.y < 0)
+	if(ball.y > canvas.height + -50 || ball.y < 0 + 50)
 		{
 			ball.vy = -ball.vy;
 			ball.color = randomColor();
 		}
+
+
+	
+	if(ball.hitTestObject(player))
+	{
+		ball.x = player.x + player.width/2 + ball.width/2;
+		ball.vx = -ball.vx;
+		
+	}
+	
 }
 
 function randomColor(){

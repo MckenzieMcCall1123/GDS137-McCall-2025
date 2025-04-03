@@ -23,7 +23,7 @@ function GameObject(x,y,w,h,color)
 	
 		//player's color
 	if(color == undefined)
-		this.color = "0000ff";
+		this.color = "#ff0000";
 	else 
 		this.color = color;
 	
@@ -34,24 +34,15 @@ function GameObject(x,y,w,h,color)
 
 	
 	//This draws the player to the screen
-	this.drawRect1 = function()
-	{
-		context.save();
-			context.fillStyle = this.color;
-			context.translate(this.x, this.y);
-			context.fillRect((-this.width + -400), (-this.height + -150), 50, 150);
-		context.restore();
-		
-	}	
-	this.drawRect2 = function()
+	this.drawRect = function()
 	{
 		context.save();
 			context.fillStyle = this.color;
 			context.translate(this.x, this.y);
 			context.fillRect((-this.width/2), (-this.height/2), this.width, this.height);
 		context.restore();
-		
 	}	
+
 	
 	this.drawCircle = function()
 	{
@@ -64,6 +55,7 @@ function GameObject(x,y,w,h,color)
 			context.closePath();
 			context.fill();
 		context.restore();
+		
 		
 	}	
 	
