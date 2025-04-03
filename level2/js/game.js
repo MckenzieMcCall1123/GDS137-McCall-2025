@@ -13,6 +13,7 @@ var player;
 	
 	//Instantiate the Player
 	player = new GameObject();
+	ball = new GameObject();
 
 	//Set the Animation Timer
 	timer = setInterval(animate, interval);
@@ -22,20 +23,37 @@ function animate()
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
 	
-	
 	//Move the Player to the right
-	if(d)
+	if(w && player.y > canvas.height/2 - 150)
 	{
-		console.log("Moving Right");
-		player.x += 2;
+		console.log("Moving Up");
+		player.y += -2;
 	}
-	if(a)
+	if(s && player.y < canvas.height/2 + 500)
 	{
-		console.log("Moving Left");
-		player.x += -2;
+		console.log("Moving Down");
+		player.y += 2;
 	}
 	
+	if(up && player.y > canvas.height/2 - 150)
+	{
+		console.log("Moving Up");
+		player.y += -2;
+	}
+	if(down)
+	{
+		console.log("Moving Down");
+		player.y += 2;
+	}
+
 	//Update the Screen
-	player.drawRect();
+	player.drawRect1();
 }
 
+function randomColor(){
+	var r = Math.round(Math.random()*255)
+	var b = Math.round(Math.random()*255)
+	var g = Math.round(Math.random()*255)
+
+	return `rgb(${r}, ${g}, ${b})`
+}

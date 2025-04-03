@@ -23,18 +23,27 @@ function GameObject(x,y,w,h,color)
 	
 		//player's color
 	if(color == undefined)
-		this.color = "#ff0000";
+		this.color = "0000ff";
 	else 
 		this.color = color;
 	
 	//player's velocity or speed on each axis
 	this.vx = 0;
-	this.vy = 0;
+	this.vy = 5;
 	
 
 	
 	//This draws the player to the screen
-	this.drawRect = function()
+	this.drawRect1 = function()
+	{
+		context.save();
+			context.fillStyle = this.color;
+			context.translate(this.x, this.y);
+			context.fillRect((-this.width + -400), (-this.height + -150), 50, 150);
+		context.restore();
+		
+	}	
+	this.drawRect2 = function()
 	{
 		context.save();
 			context.fillStyle = this.color;
@@ -55,6 +64,7 @@ function GameObject(x,y,w,h,color)
 			context.closePath();
 			context.fill();
 		context.restore();
+		context.render();
 		
 	}	
 	
