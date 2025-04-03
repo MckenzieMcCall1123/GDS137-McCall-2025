@@ -29,7 +29,7 @@ function GameObject(x,y,w,h,color)
 	
 	//player's velocity or speed on each axis
 	this.vx = 0;
-	this.vy = 5;
+	this.vy = 0;
 	
 
 	
@@ -64,7 +64,6 @@ function GameObject(x,y,w,h,color)
 			context.closePath();
 			context.fill();
 		context.restore();
-		context.render();
 		
 	}	
 	

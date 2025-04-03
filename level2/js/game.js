@@ -18,6 +18,7 @@ var player;
 	//Set the Animation Timer
 	timer = setInterval(animate, interval);
 
+
 function animate()
 {
 	//Erase the Screen
@@ -48,6 +49,37 @@ function animate()
 
 	//Update the Screen
 	player.drawRect1();
+
+	ball.drawCircle();
+	ball.move();
+	ball.vy += 5;
+	ball.vx += 5;
+	//--------------Bounce of Right----------------------
+	if(ball.x > canvas.width - ball.width + -50)
+		{
+			ball.vx = -ball.vx;
+			ball.color = randomColor();
+		}
+		//--------------Bounce of Left-----------------------
+		if(ball.x < ball.width/-2){
+		
+			ball.vx = -ball.vx;
+			ball.color = randomColor();
+		}
+	
+		//------------
+		if(ball.y < ball.height/-2){
+		
+			ball.vy = -ball.vy;
+			ball.color = randomColor();
+		}
+	
+		if(ball.y > ball.height - ball.height + -50)
+			{
+				ball.vy = -ball.vy;
+				ball.color = randomColor();
+			}
+		//---------------------------------------------------
 }
 
 function randomColor(){
