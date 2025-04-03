@@ -14,7 +14,8 @@ var player;
 	//Instantiate the Player
 	player = new GameObject();
 	ball = new GameObject();
-
+	ball.vy = 5;
+	ball.vx = 10;
 	//Set the Animation Timer
 	timer = setInterval(animate, interval);
 
@@ -52,34 +53,26 @@ function animate()
 
 	ball.drawCircle();
 	ball.move();
-	ball.vy += 5;
-	ball.vx += 5;
-	//--------------Bounce of Right----------------------
-	if(ball.x > canvas.width - ball.width + -50)
+	
+
+	if(ball.x + ball.width/2 > canvas.width)
 		{
 			ball.vx = -ball.vx;
 			ball.color = randomColor();
 		}
-		//--------------Bounce of Left-----------------------
-		if(ball.x < ball.width/-2){
-		
+	
+	if(ball.x < 0)
+		{
 			ball.vx = -ball.vx;
 			ball.color = randomColor();
 		}
-	
-		//------------
-		if(ball.y < ball.height/-2){
-		
+
+
+	if(ball.y > canvas.height || ball.y < 0)
+		{
 			ball.vy = -ball.vy;
 			ball.color = randomColor();
 		}
-	
-		if(ball.y > ball.height - ball.height + -50)
-			{
-				ball.vy = -ball.vy;
-				ball.color = randomColor();
-			}
-		//---------------------------------------------------
 }
 
 function randomColor(){
