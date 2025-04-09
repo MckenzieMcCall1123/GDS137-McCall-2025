@@ -17,8 +17,9 @@ var player;
 	player.height = 150;
 
 	ball = new GameObject();
-	ball.vy = 10;
+	ball.vy = 0;
 	ball.vx = 10;
+	ball.width = 50;
 	//Set the Animation Timer
 	timer = setInterval(animate, interval);
 
@@ -31,12 +32,12 @@ function animate()
 	if(w && player.y > canvas.height/2 - 325)
 	{
 		console.log("Moving Up");
-		player.y += -2;
+		player.y += -5;
 	}
 	if(s && player.y < canvas.height/2 + 325)
 	{
 		console.log("Moving Down");
-		player.y += 2;
+		player.y += 5;
 	}
 
 	//Update the Screen
@@ -54,6 +55,8 @@ function animate()
 	
 	if(ball.x < 0 + 50)
 		{
+			ball.x = 500;
+			ball.y = 500;
 			ball.vx = -ball.vx;
 			ball.color = randomColor();
 		}
@@ -67,12 +70,27 @@ function animate()
 
 
 	
+
 	if(ball.hitTestObject(player))
-	{
-		ball.x = player.x + player.width/2 + ball.width/2;
-		ball.vx = -ball.vx;
-		
-	}
+		{
+		ball.x = player.x + player.width /2 + ball.width /2
+			 //ball hits top
+			 if(ball.y > player.y + player.height/6)
+			 {
+				ball.vy = 5;
+			 }
+			 //ball hit bottom
+			 else if (ball.y < player.y - player.height/6)
+			 {
+				ball.vy = -5;
+			 }
+			 //ball hits middle
+			 else
+			 {
+				ball.vy = 0;
+			 }
+			 ball.vx = -ball.vx;
+		}
 	
 }
 
