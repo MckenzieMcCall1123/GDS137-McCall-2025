@@ -1,5 +1,6 @@
 //Declare my variables
-
+var p1score = 0;
+var p2score = 0;
 var canvas;
 var context;
 var timer;
@@ -7,11 +8,15 @@ var timer;
 var interval = 1000/60;
 var player;
 var player2;
+// Player wins
+var p1Wins = 0;
+var p2Wins = 0;
 
 	//Set Up the Canvas
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");	
-	
+
+
 	//Instantiate the Player
 	player = new GameObject(25, canvas.height/2);
 	player.width = 25;
@@ -37,6 +42,16 @@ function animate()
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
 	
+	context.font = "20px Georgia";
+	context.fillText(`Score: ${p1score}`, 10, 50);
+	context.fillstyle = "#000000";
+
+	context.font = "20px Georgia";
+	context.fillText(`Score: ${p2score}`, 940, 50);
+	context.fillstyle = "#000000";
+	
+	context.save();
+
 	// Player 1
 	if(w && player.y > canvas.height/2 - 325)
 	{
@@ -71,8 +86,11 @@ function animate()
 
 	if(ball.x > canvas.width + -50)
 		{
+			ball.x = 500;
+			ball.y = 500;
 			ball.vx = -ball.vx;
 			ball.color = randomColor();
+			p1score++;
 		}
 	
 	if(ball.x < 0 + 50)
@@ -81,6 +99,7 @@ function animate()
 			ball.y = 500;
 			ball.vx = -ball.vx;
 			ball.color = randomColor();
+			p2score++;
 		}
 
 
