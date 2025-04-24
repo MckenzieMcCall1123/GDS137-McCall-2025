@@ -1,4 +1,6 @@
 //Declare my variables
+//Global Variables
+var img = document.getElementById("ric");
 var p1score = 0;
 var p2score = 0;
 var canvas;
@@ -41,6 +43,9 @@ function animate()
 {
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
+
+	// Draws image
+	context.drawImage(img, ball.x -25, ball.y -25, ball.width = 50, ball.height = 50);
 
 	context.save();
 	context.strokeStyle = "#00ff00";
@@ -90,7 +95,7 @@ function animate()
 	player.drawRect();
 	player2.drawRect();
 
-	ball.drawCircle();
+	//ball.drawCircle();
 	ball.move();
 	
 
