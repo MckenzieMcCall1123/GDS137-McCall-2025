@@ -41,6 +41,16 @@ function animate()
 {
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
+
+	context.save();
+	context.strokeStyle = "#00ff00";
+	context.beginPath();
+	context.moveTo(500, 0);
+	context.lineTo(500, 1000);
+	context.closePath();
+	context.lineWidth = 10; 
+	context.stroke();
+	context.restore();
 	
 	context.font = "20px Georgia";
 	context.fillText(`Score: ${p1score}`, 10, 50);
