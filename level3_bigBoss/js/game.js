@@ -28,15 +28,17 @@ var friction = .85;
 	player.x = 500;
 	player.y = 750;
 	player.color = "cyan";
-	player.force = 1;
+	player.force = 2;
+	pScore = 0;
 
 	ball = new GameObject();
 	ball.vy = 1;
 	ball.vx = 1;
 	ball.width = 100;
+	ball.force = 3;
 	ball.color = "magenta";
 	//Set the Animation Timer
-	timer = setInterval(animate, interval);
+	timer = setInterval(animate, interval); 
 
 
 function animate()
@@ -59,7 +61,7 @@ function animate()
 	
 	// Puts score on screen
 	context.font = "20px Georgia";
-	context.fillText(`Score: ${p1score}`, 10, 50);
+	context.fillText(`Score: ${pScore}`, 10, 50);
 	context.fillstyle = "#000000";
 	context.save();
 
@@ -84,7 +86,7 @@ function animate()
 	ball.drawCircle();
 	ball.move();
 	
-
+// ball and wall collision
 	if(ball.x > canvas.width + -50)
 		{
 			ball.vx = -ball.vx;
@@ -99,7 +101,9 @@ function animate()
 		{
 			ball.vy = -ball.vy;
 			ball.color = randomColor();
+			pScore = 0;
 		}
+
 
 // player canvas detection
 	if(player.x > canvas.width - player.width /2)
@@ -117,21 +121,31 @@ function animate()
 		// Paddle section detection mechanics
 	if(ball.hitTestObject(player))
 		{
-		ball.y = player.y - player.height /2 - ball.width /2;
+		ball.y = player.y - ball.height/2 - player.height/2;
 		ball.vy = -35;
-			 //ball hits top
-			 if(ball.x > player.x + player.width/6)
-			 {
-				ball.vx = 5;
-			 }
-			 //ball hit bottom
-			if (ball.x < player.x - player.width/6)
-			 {
-				ball.vx = -5;
-			 }
-			
-			 
-		}
+		pScore++;
+		
+
+		// Ball hitting left side of paddle:
+		if (ball.x < player.x - player.width/6)
+			{
+				ball.vx = -ball.force;
+			}
+		if (ball.x < player.x - player.width/3)
+			{
+				ball.vx = -ball.force *5;
+			}
+		
+		// Ball hitting right side of paddle:
+		if(ball.x > player.x + player.width/6)
+			{
+			ball.vx = ball.force;
+			}
+		if (ball.x > player.x + player.width/3)
+			{
+				ball.vx = ball.force *5;
+			} 
+	}
 }
 
 function randomColor(){
