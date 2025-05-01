@@ -60,7 +60,7 @@ function animate()
 	context.restore();
 	
 	// Puts score on screen
-	context.font = "20px Georgia";
+	context.font = "20px Arial";
 	context.fillText(`Score: ${pScore}`, 10, 50);
 	context.fillstyle = "#000000";
 	context.save();
