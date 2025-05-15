@@ -24,7 +24,7 @@ var player;
 		platform1.width = 125;
 		platform1.height = 300;
 		platform1.x = 500;
-		platform1.y = 575;
+		platform1.y = 550;
 		platform1.color = "#ffff00";
 		
 	platform2 = new GameObject();
