@@ -5,7 +5,6 @@ var context;
 var timer;
 var interval;
 var player;
-var key;
 
 
 	canvas = document.getElementById("canvas");
@@ -34,7 +33,7 @@ var key;
 		
 	
 	goal = new GameObject({width:24, height:50, x:20, y:platform0.y-100, color:"#00ffff"});
-	key = goal;
+	
 
 	var fX = .85;
 	var fY = .97;
@@ -134,14 +133,15 @@ function animate()
 		player.vx = 0;
 	}
 	if(platform1.hitTestPoint(player.right()) && player.vx >=0)
+	{
+		if(goal.y == 10000)
 		{
-			if(goal.y == 10000)
-				{
-					platform1.y = 10000;
-					player.x--;
-					player.vx = 0;
-				}
+			platform1.y = 10000;
+			player.x--;
+			player.vx = 0;
 		}
+		
+	}
 	while(platform1.hitTestPoint(player.right()) && player.vx >=0)
 	{
 		player.x--;
@@ -160,10 +160,15 @@ function animate()
 	}
 	
 	
+
+
+
 	
 
-
-
+	
+	
+	
+	
 	
 	platform0.drawRect();
 	platform2.drawRect();
