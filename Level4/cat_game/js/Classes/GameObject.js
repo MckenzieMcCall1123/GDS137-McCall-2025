@@ -79,11 +79,11 @@ function GameObject(obj)
 	}
 	this.bottomLeft = function() 
 	{
-		return {x:this.x - 25, y:this.y + this.height/2}
+		return {x:this.x - 75, y:this.y + this.height/2}
 	}
 	this.bottomRight = function() 
 	{
-		return {x:this.x + 25 , y:this.y + this.height/2}
+		return {x:this.x + 75 , y:this.y + this.height/2}
 	}
 
 	this.hitTestObject = function(obj)
@@ -92,8 +92,8 @@ function GameObject(obj)
 		   this.right().x >= obj.left().x &&
 		   this.top().y <= obj.bottom().y &&
 		   this.bottom().y >= obj.top().y&&
-		   this.bottomLeft().y >= obj.top().y &&
-		   this.bottomRight().y >= obj.top().y)
+		   this.bottomLeft().y <= obj.bottomLeft().y &&
+		   this.bottomRight().y <= obj.bottonRight().y)
 		{
 			return true
 		}
@@ -131,8 +131,9 @@ function GameObject(obj)
 		context.fillRect(this.right().x-size/2, this.right().y-size/2, size, size);
 		context.fillRect(this.top().x-size/2, this.top().y-size/2, size, size);
 		context.fillRect(this.bottom().x-size/2, this.bottom().y-size/2, size, size);
-		context.fillRect(this.bottomLeft().x-size/2 - 25, this.bottomLeft().y-size/2, size, size);
-		context.fillRect(this.bottomRight().x-size/2 + 25, this.bottomRight().y-size/2, size, size);
+		context.fillRect(this.bottomLeft().x-size/2, this.bottomLeft().y-size/2, size, size);
+		context.fillRect(this.bottomRight().x-size/2, this.bottomRight().y-size/2, size, size);
+		
 		context.fillRect(this.x-size/2, this.y-size/2, size, size);
 		context.restore();
 	}

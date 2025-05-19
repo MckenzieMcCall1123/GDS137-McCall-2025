@@ -5,12 +5,15 @@ var context;
 var timer;
 var interval;
 var player;
+var lookDirect = true;
 
 
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");	
 
 	player = new GameObject({x:100, y:canvas.height/2-100});
+	player.width = 150;
+	player.height = 125;
 
 	platform0 = new GameObject();
 		platform0.width = 125;
@@ -62,10 +65,12 @@ function animate()
 	if(a)
 	{
 		player.vx += -player.ax * player.force;
+		lookDirect = true;
 	}
 	if(d)
 	{
 		player.vx += player.ax * player.force;
+		lookDirect = false;
 	}
 
 	player.vx *= fX;
@@ -79,6 +84,18 @@ function animate()
 	platform1.x += platform1.vx;
 
 	while(platform0.hitTestPoint(player.bottom()) && player.vy >=0)
+	{
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+	}
+	while(platform0.hitTestPoint(player.bottomLeft()) && player.vy >=0)
+	{
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+	}
+	while(platform0.hitTestPoint(player.bottomRight()) && player.vy >=0)
 	{
 		player.y--;
 		player.vy = 0;
@@ -110,6 +127,18 @@ function animate()
 		player.vy = 0;
 		player.canJump = true;
 	}
+	while(platform2.hitTestPoint(player.bottomLeft()) && player.vy >=0)
+	{
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+	}
+	while(platform2.hitTestPoint(player.bottomRight()) && player.vy >=0)
+	{
+		player.y++;
+		player.vy = 0;
+		player.canJump = true;
+	}
 	while(platform2.hitTestPoint(player.left()) && player.vx <=0)
 	{
 		player.x++;
@@ -126,6 +155,18 @@ function animate()
 		player.vy = 0;
 	}
 	while(platform1.hitTestPoint(player.bottom()) && player.vy >=0)
+	{
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+	}
+	while(platform1.hitTestPoint(player.bottomLeft()) && player.vy >=0)
+	{
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+	}
+	while(platform1.hitTestPoint(player.bottomRight()) && player.vy >=0)
 	{
 		player.y--;
 		player.vy = 0;
@@ -162,14 +203,26 @@ function animate()
 
 
 	
-	context.drawImage(scratchpost, platform1.x - platform1.width/2, platform1.y - platform1.height/2, platform1.width, platform1.height);
+	context.drawImage(scratchpost, platform1.x - platform1.width/2, platform1.y - platform1.height/2, platform1.width, 
+		platform1.height);
+
 	
+
+	
+	
+
 	platform0.drawRect();
 	platform2.drawRect();
-	player.drawRect();
+	
 	
 	//Show hit points
 	player.drawDebug();
 	goal.drawCircle();
+	if(lookDirect == true){
+		context.drawImage(catSwap, player.x - player.width/2, player.y - player.height/2, player.width, player.height);
+	}
+	if(lookDirect == false){
+		context.drawImage(cat, player.x - player.width/2, player.y - player.height/2, player.width, player.height);
+	}
 }
 
