@@ -86,11 +86,8 @@ function animate()
 		attack.y = player.y - 15;
 		attack.vx = 5*player.dir;
 	}
-
 	attack.move();
 	
-
-
 
 	player.vx *= fX;
 	player.vy *= fY;
@@ -245,6 +242,13 @@ function animate()
 	}
 	if(lookDirect == false){
 		context.drawImage(cat, player.x - player.width/2, player.y - player.height/2, player.width, player.height);
+	}
+
+	if(lookDirect == true && space == true){
+		context.drawImage(catAttack2, player.x - player.width/2, player.y - player.height/2, player.width, player.height);
+	}
+	if(lookDirect == false && space == true){
+		context.drawImage(catAttack, player.x - player.width/2, player.y - player.height/2, player.width, player.height);
 	}
 }
 
