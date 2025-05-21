@@ -37,6 +37,12 @@ var lookDirect = true;
 		platform2.y = platform0.y- 200;
 		platform2.color = "#66ff33";
 
+	attack = new GameObject();
+		attack.width = 50;
+		attack.height = 50;
+		attack.x = 200;
+		attack.color = "#0000ff";
+		attack.y = 500;
 		
 	
 	goal = new GameObject({width:24, height:50, x:20, y:platform0.y-100, color:"#00ffff"});
@@ -66,12 +72,25 @@ function animate()
 	{
 		player.vx += -player.ax * player.force;
 		lookDirect = true;
+		player.dir = -1;
 	}
 	if(d)
 	{
 		player.vx += player.ax * player.force;
 		lookDirect = false;
+		player.dir = 1;
 	}
+	if(space)
+	{
+		attack.x = player.x;
+		attack.y = player.y - 15;
+		attack.vx = 5*player.dir;
+	}
+
+	attack.move();
+	
+
+
 
 	player.vx *= fX;
 	player.vy *= fY;
@@ -82,6 +101,8 @@ function animate()
 	player.y += Math.round(player.vy);
 	
 	platform1.x += platform1.vx;
+
+
 
 	while(platform0.hitTestPoint(player.bottom()) && player.vy >=0)
 	{
@@ -206,7 +227,8 @@ function animate()
 	context.drawImage(scratchpost, platform1.x - platform1.width/2, platform1.y - platform1.height/2, platform1.width, 
 		platform1.height);
 
-	
+	context.drawImage(fire, attack.x - attack.width/2, attack.y - attack.height/2, attack.width, 
+		attack.height)
 
 	
 	

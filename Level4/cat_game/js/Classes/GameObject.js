@@ -11,7 +11,8 @@ function GameObject(obj)
 		this.ay = 1;
 		this.vx = 0;
 		this.vy = 0;
-
+		this.dir = 1;
+		
 	//whether or not the object can jump
 	this.canJump = false;
 	this.jumpHeight = -25;
